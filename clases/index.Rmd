@@ -7,10 +7,7 @@ output:
     html_document:
       toc: TRUE
       toc_float: TRUE
-      
 ---
-
-## CIFE  
 
 ## Clase 1
 
@@ -27,6 +24,12 @@ output:
 5) [Media](./01_Media/01_Media.html)
 
 
+### Videos
+
+1) [Motivación](https://youtu.be/KkgTu8_edPg)
+3) [Definición de conceptos](https://youtu.be/safhRHTMWcU)
+2) [Ejemplos de Bases de Datos](https://youtu.be/P-Iskr34erg)
+
 ## Clase 2
 1) [Medidas de dispersión](./01_Medidas_de_dispersion/01_Medidas_de_dispersion.html)
 7) [Medidas de forma](./01_Medidas_de_forma/01_Medidas_de_forma.html)
@@ -34,11 +37,6 @@ output:
 8) [Tablas de contingencia](./01_tablas_de_contingencia/tablas_de_contingencia.html)  
 8) [Grado de asociacion](./01_grado_de_asociacion/grado_de_asociacion.html)  
 
-### Videos
-
-1) [Motivación](https://youtu.be/KkgTu8_edPg)
-3) [Definición de conceptos](https://youtu.be/safhRHTMWcU)
-2) [Ejemplos de Bases de Datos](https://youtu.be/P-Iskr34erg)
 
 ## Prácticos
 
