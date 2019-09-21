@@ -1,0 +1,49 @@
+---
+title: "<img src='./img/logo_UCC.png' width='150' style = 'position:absolute; top:10px; right:15%; padding:10px; z-index:-1; opacity:0.25'>Psicoestadística"
+subtitle: "Facultad de Educación<br> Universidad Católica de Córdoba"
+author: Matías A. Alfonso
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+    html_document:
+      toc: TRUE
+      toc_float: TRUE
+      
+---
+
+## CIFE  
+
+## Clase 1
+
+### Diapositivas
+1) [Introducción](./01_Introducción/introduccion.html)
+2) [Ejemplos](./01_ejemplosIntroduccion/ejemplosIntroduccion.html)
+3) [Niveles de Medición](./01_NivelesMedicion/nivelesMedicion.html)
+4) [Tablas de distribución de frecuencias](./01_tablasFrecuencia/01_tablasFrecuencia.html)
+5) [Gráficos frecuencias](./01_Graficos_de_resumen/01_Graficos_de_Resumen.html)
+6) [Medidas de Resumen](./01_Medidas_de_Resumen/01_Medidas_de_Resumen.html)
+1) [Proporción](./01_Proporcion/01_Proporcion.html)
+3) [Moda](./01_Moda/01_Moda.html)
+4) [Mediana](./01_Mediana/01_Mediana.html)
+5) [Media](./01_Media/01_Media.html)
+
+
+## Clase 2
+1) [Medidas de dispersión](./01_Medidas_de_dispersion/01_Medidas_de_dispersion.html)
+7) [Medidas de forma](./01_Medidas_de_forma/01_Medidas_de_forma.html)
+7) [Gráficos de resumen](./01_Graficos_de_resumen/01_Graficos_de_Resumen.html)
+8) [Tablas de contingencia](./01_tablas_de_contingencia/tablas_de_contingencia.html)  
+8) [Grado de asociacion](./01_grado_de_asociacion/grado_de_asociacion.html)  
+
+### Videos
+
+1) [Motivación](https://youtu.be/KkgTu8_edPg)
+3) [Definición de conceptos](https://youtu.be/safhRHTMWcU)
+2) [Ejemplos de Bases de Datos](https://youtu.be/P-Iskr34erg)
+
+## Prácticos
+
+1) [Práctico 1](practicos/practico1.pdf)
+
+## Guías de Instalación de Software
+
+* [Infostat](https://www.youtube.com/watch?v=Wq7yUAiTgCo)

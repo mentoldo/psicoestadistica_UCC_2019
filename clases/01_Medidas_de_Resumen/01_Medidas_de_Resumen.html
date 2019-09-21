@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Medidas de Resumen</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Medidas de Resumen',
+                        subtitle: 'Universidad Católica de Córdoba',
+                useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                        favIcon: '01_Medidas_de_Resumen_files/logo.png',
+              },
+
+      // Author information
+      presenters: [
+            {
+        name:  'Matías A. Alfonso' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <link href="01_Medidas_de_Resumen_files/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
+  <link href="01_Medidas_de_Resumen_files/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
+  <link href="01_Medidas_de_Resumen_files/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
+  <script src="01_Medidas_de_Resumen_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+  <script src="01_Medidas_de_Resumen_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+  <script src="01_Medidas_de_Resumen_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+  <script src="01_Medidas_de_Resumen_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+  <script src="01_Medidas_de_Resumen_files/ioslides-13.5.1/js/hammer.js"></script>
+  <script src="01_Medidas_de_Resumen_files/ioslides-13.5.1/js/slide-controller.js"></script>
+  <script src="01_Medidas_de_Resumen_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    summary {
+      display: list-item;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+/* https://github.com/ropensci/plotly/pull/524#issuecomment-468142578 */
+slide:not(.current) .plotly.html-widget{
+  display: block;
+}
+
+    slides > slide:not(.nobackground):before {
+      font-size: 12pt;
+      content: "";
+      position: absolute;
+      bottom: 20px;
+      left: 60px;
+      background: url(01_Medidas_de_Resumen_files/logo.png) no-repeat 0 50%;
+      -webkit-background-size: 30px 30px;
+      -moz-background-size: 30px 30px;
+      -o-background-size: 30px 30px;
+      background-size: 30px 30px;
+      padding-left: 40px;
+      height: 30px;
+      line-height: 1.9;
+    }
+  </style>
+
+  <link rel="stylesheet" href="../css/styles.css" type="text/css" />
+
+</head>
+
+<body style="opacity: 0">
+
+<slides>
+
+  <slide class="title-slide segue nobackground">
+        <aside class="gdbar"><img src="01_Medidas_de_Resumen_files/logo.png"></aside>
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+            <p style="margin-top: 6px; margin-left: -2px;">04 septiembre, 2019</p>
+          </hgroup>
+  </slide>
+
+<slide class=""><hgroup><h2>Resumen de la información</h2></hgroup><article  id="resumen-de-la-informacion" class="build">
+
+<p>Para resumir la información, haremos uso de:</p>
+
+<ul>
+<li>Tablas</li>
+<li>Gráficos</li>
+<li><strong>Medidas de Resumen</strong></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Medidas de resumen</h2></hgroup><article  id="medidas-de-resumen" class="build">
+
+<ul>
+<li>Nos permiten <strong>sintetizar información</strong></li>
+<li>Las medidas de resumen dependen del <strong>Nivel de medición de la variable</strong></li>
+</ul>
+
+<h3>Tipos</h3>
+
+<ul>
+<li><strong>Medidas de posición</strong></li>
+<li>Medidas de dispersión</li>
+<li>Medidas de forma</li>
+</ul>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Medidas de posición</h2></hgroup><article  id="medidas-de-posicion">
+
+</article></slide><slide class=""><hgroup><h2>Medidas de posición</h2></hgroup><article  id="medidas-de-posicion-1" class="build">
+
+<ul>
+<li><p>Nos permiten resumir en un solo número algunas localizaciones de la distribución de los datos</p></li>
+<li><p>Las clasificamos en:</p></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+
+<h3>Medidas de tendencia central</h3>
+
+<ul>
+<li>Proporción</li>
+<li>Moda (o modo)</li>
+<li>Mediana</li>
+<li>Media</li>
+</ul>
+
+<h3>Medidas de tendencia no-central</h3>
+
+<ul>
+<li>Cuartiles</li>
+<li>Percentiles</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Medidas de resumen</h2></hgroup><article  id="medidas-de-resumen-1">
+
+<ul>
+<li>Medidas de posición</li>
+<li><strong>Medidas de dispersión</strong></li>
+<li>Medidas de forma</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Medidas de dispersión</h2></hgroup><article  id="medidas-de-dispersion">
+
+<ul>
+<li>Indican si los valores observados se encuentran <strong>concentrados</strong> o <strong>dispersos</strong> (alejados).</li>
+</ul>
+
+<p>Estudiaremos los siguientes:</p>
+
+<ul>
+<li>Recorrido (o rango)</li>
+<li>Recorrido (o rango) intercuartilar</li>
+<li>Varianza</li>
+<li>Desvío estándar</li>
+<li>Coeficiente de variación</li>
+<li>Coeficiente de incertidumbre</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Medidas de resumen</h2></hgroup><article  id="medidas-de-resumen-2">
+
+<ul>
+<li>Medidas de posición</li>
+<li>Medidas de dispersión</li>
+<li><strong>Medidas de forma</strong></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Medidas de forma</h2></hgroup><article  id="medidas-de-forma">
+
+<ul>
+<li>Asimetría</li>
+<li>Curtosis</li>
+</ul></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

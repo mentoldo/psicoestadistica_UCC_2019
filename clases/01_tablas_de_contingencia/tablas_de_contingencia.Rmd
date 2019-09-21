@@ -1,0 +1,217 @@
+---
+title: "Relaciones entre variables"
+subtitle: "Universidad Nacional de Córdoba"
+author: Matías A. Alfonso
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  ioslides_presentation:
+      css: "../css/styles.css"
+      self_contained: false
+      logo: "../img/logo_UCC.png"
+      incremental: true
+      df_print: kable
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Para poder imprimir las tablas con kable_styling
+options("kableExtra.html.bsTable" = T, knitr.kable.NA = '')
+# library(tables)
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(dplyr)
+```
+
+## Relaciones entre variables
+* Hasta ahora, nos hemos centrado en la descripción de variables individuales.
+* Comenzaremos a hablar de **relaciones** entre variables.
+* Hablaremos de **asociación** entre variables.
+* **Asociación** no implica **causalidad**
+* Utilizaremos medidas, tablas y gráficos para evaluar la intensidad de esa asociación.
+
+## Tablas de contingencia
+
+
+* También llamadas **tabla bivariada**, **tabla de contingencia** o **tabla de distribución conjunta**.
+* Es una **tabla** donde las filas son las categorías de una variable y las **columnas** son las categorías de otra.
+* Las **frecuencias conjuntas** indican la cantidad de casos que corresponden a las categorías de ambas variables.
+* Las **frecuencias marginales** son los totales por fila y por columna.
+* Se pueden realizar en variables **nominales** y **ordinales** (y en variables de nivel superior)
+
+## Ejemplo
+
+* Supongamos que queremos saber si el autoritarismo del docente está relacionado al rendimiento de los alumnos
+* Tenemos entonces las siguientes variables:
+
+* Tipo de docente:
+    1. Autoritario
+    2. Democrático
+    
+* Rendimiento:
+    1. Bajo
+    2. Medio
+    3. Alto
+    
+
+
+## Matriz de datos
+
+```{r, echo = FALSE}
+ensennanza <- read.csv2("../data/tipoEnsennanza.csv")
+
+kable(ensennanza) %>% 
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                  full_width = T) %>% 
+     scroll_box(width = "100%", height = "500px")
+
+```
+
+## Tabla de contingencia
+  
+```{r, echo = FALSE}
+mat <- matrix(rep(NA, 6), 2, byrow = TRUE)
+mat <- addmargins(mat)
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo", "Medio", "Alto", "Total"))
+
+## Convertimos a data frame para nice print
+mat <- as.data.frame(cbind(`Tipo de docente` = c("Autoritario", "Democrático", "Total"), mat), row.names = F)
+# tabular(as.table(mat))
+
+# toKable(as.tabular(mat))
+
+mat %>%  
+    kable(digits = 2, col.names = c("Tipo de docente", "Bajo", "Medio", "Alto", "Total"), escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = T) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 3, " " = 1)) #%>% 
+    # pack_rows("Tipo de docente", 1, 3, label_row_css = NULL)
+
+```
+
+
+## Tabla de contingencia
+
+```{r, echo = FALSE}
+ensennanza$rendimiento <- factor(ensennanza$rendimiento, labels = c("Bajo", "Medio", "Alto"), ordered = TRUE)
+mat <- table(ensennanza$tipo, ensennanza$rendimiento)
+mat <- addmargins(mat)
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo", "Medio", "Alto", "Total"))
+
+## Convertimos a data frame para nice print
+mat <- as.data.frame(cbind(`Tipo de docente` = c("Autoritario", "Democrático", "Total"), mat), row.names = F)
+
+
+mat %>%  
+    kable(digits = 2, col.names = c("Tipo de docente", "Bajo", "Medio", "Alto", "Total"), escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = T) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 3, " " = 1)) 
+
+```
+
+## Tabla de contingencia
+
+* La fila y columna **Total** se denominan **frecuencias marginales** por fila y por columna.
+* Las tablas de contingencia también se pueden presentar por **frecuencias relativas por fila**, **frecuencias relativas por columna** y **frecuencias relativas al total**.
+* Construyamos estas tres tablas en el ejemplo anterior.
+
+## Frecuencias relativas por filas
+
+```{r, echo = FALSE}
+ensennanza$rendimiento <- factor(ensennanza$rendimiento, labels = c("Bajo", "Medio", "Alto"), ordered = TRUE)
+mat <- table(ensennanza$tipo, ensennanza$rendimiento)
+mat <- addmargins(mat, 1)
+mat <- prop.table(mat, 1)
+mat <- addmargins(mat, 2)
+
+mat <- round(mat, 2)
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo", "Medio", "Alto", "Total"))
+
+## Convertimos a data frame para nice print
+mat <- as.data.frame(cbind(`Tipo de docente` = c("Autoritario", "Democrático", "Total"), mat), row.names = F)
+
+mat %>%  
+    kable(digits = 2, col.names = c("Tipo de docente", "Bajo", "Medio", "Alto", "Total"), escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = T) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 3, " " = 1)) 
+
+```
+
+## Frecuencias relativas por fila
+
+* ¿Cómo se lee?
+* El 26% de los alumnos que tuvieron un docente autoritario tiene rendimiento bajo
+* El 31% de los alumnos que tuvieron un docente democrático tiene rendimiento alto
+* El 29% de los alumnos tiene rendimiento bajo
+
+
+## Frecuencias relativas por columna
+
+```{r, echo = FALSE}
+ensennanza$rendimiento <- factor(ensennanza$rendimiento, labels = c("Bajo", "Medio", "Alto"), ordered = TRUE)
+mat <- table(ensennanza$tipo, ensennanza$rendimiento)
+mat <- addmargins(mat, 2)
+mat <- prop.table(mat, 2)
+mat <- addmargins(mat, 1)
+
+mat <- round(mat, 2)
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo", "Medio", "Alto", "Total"))
+
+## Convertimos a data frame para nice print
+mat <- as.data.frame(cbind(`Tipo de docente` = c("Autoritario", "Democrático", "Total"), mat), row.names = F)
+
+mat %>%  
+    kable(digits = 2, col.names = c("Tipo de docente", "Bajo", "Medio", "Alto", "Total"), escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = T) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 3, " " = 1)) 
+```
+
+## Frecuencias relativas por columna
+
+* El 34% de los alumnos con rendimiento bajo tuvo un docente autoritario
+* El 66% de los docentes con rendimiento bajo tuvo un docente democrático
+* El 39% de los alumnos tuvieron un docente autoritario
+
+## Frecuencias relativas al total
+
+```{r, echo = FALSE}
+ensennanza$rendimiento <- factor(ensennanza$rendimiento, labels = c("Bajo", "Medio", "Alto"), ordered = TRUE)
+mat <- table(ensennanza$tipo, ensennanza$rendimiento)
+mat <- prop.table(mat)
+mat <- addmargins(mat)
+
+
+mat <- round(mat, 2)
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo", "Medio", "Alto", "Total"))
+
+## Convertimos a data frame para nice print
+mat <- as.data.frame(cbind(`Tipo de docente` = c("Autoritario", "Democrático", "Total"), mat), row.names = F)
+
+mat %>%  
+    kable(digits = 2, col.names = c("Tipo de docente", "Bajo", "Medio", "Alto", "Total"), escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = T) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 3, " " = 1)) 
+```
+
+## Frecuencias relativas al total
+
+* El 10% de los alumnos tuvieron un docente autoritario y un rendimiento bajo
+* El 19% de los alumnos tuvieron un docente democrático y un rendimiento alto 
+* El 29% de los alumnos tuvo un rendimiento bajo.
+
+

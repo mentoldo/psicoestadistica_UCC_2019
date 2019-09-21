@@ -1,0 +1,46 @@
+---
+title: "CIFE"
+subtitle: "Universidad Católica de Córdoba"
+author: Matías A. Alfonso
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  ioslides_presentation:
+      css: "../css/styles.css"
+      self_contained: false
+      logo: "../img/logo_UCC.png"
+      incremental: true
+      df_print: kable
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(knitr)
+library(kableExtra)
+```
+
+## Presentación
+
+El [CIFE](https://www.ucc.edu.ar/facultades/cife/presentacion/) es el Centro de investigación de la Facultad de Educación. Desarrolla tareas de:
+
+* Investigación
+* Tutorías
+* Formación de Recursos Humanos
+* Divulgación
+
+## Equipo de Trabajo
+
+* Dr. Eduardo Bologna
+* Lic. Andrea Arnoletto
+* Lic. Matías Alfonso
+
+### Contacto
+
+* mail: investigacion.educacion@ucc.edu.ar
+
+## Horarios de Tutorías
+  
+* Lunes 9-13hs
+* Martes 13-17hs
+* Jueves 9-13hs
+* Viernes 11-16hs

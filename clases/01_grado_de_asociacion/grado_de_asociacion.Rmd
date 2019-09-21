@@ -1,0 +1,277 @@
+---
+title: "Relaciones entre variables"
+subtitle: "Universidad Nacional de Córdoba"
+author: Matías A. Alfonso
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  ioslides_presentation:
+      css: "../css/styles.css"
+      self_contained: false
+      logo: "../img/logo_UCC.png"
+      incremental: true
+      df_print: kable
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Para poder imprimir las tablas con kable_styling
+options("kableExtra.html.bsTable" = T, knitr.kable.NA = '')
+# library(tables)
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(dplyr)
+```
+
+
+## El grado de asociación
+
+* Decimos que eventos son independientes si la ocurrencia de uno de ellos no afecta la ocurrencia del otro.
+* **Definición**: Dos variables son estadísticamente independientes si la frecuencia relativa de cada celda es igual al producto de las **frecuencias relativas marginales** de la fila y columna a las que la celda pertenece.
+* Volvamos al ejemplo anterior, pero ahora supongamos que medimos la variable rendimiento con dos categorías posibles: bajo, alto.
+* Supongamos que el tipo de docente tiene un efecto sobre el rendimiento y obtenemos una tabla como la siguiente. Es decir, las variables **no son independientes**   
+
+
+---
+
+```{r, echo = FALSE}
+mat <- matrix(nrow = 3, ncol = 3)
+mat[, 3] <- c(60, 40, 100)
+mat[, 2] <- c(0, 40, 40)
+mat[, 1] <- c(60, 0, 60)
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo","Alto", "Total"))
+
+## Convertimos a data frame para nice print
+mat <- as.data.frame(cbind(`Tipo de docente` = c("Autoritario", "Democrático", "Total"), mat), row.names = F)
+
+mat %>%  
+    kable(digits = 2, col.names = c("Tipo de docente", "Bajo", "Alto", "Total"), escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = T) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 2, " " = 1)) 
+```
+
+* Esto es un efecto extremo. En la práctica, si hubiera asociación entre variables, esperaríamos algo más parecido a esto:
+
+---
+
+```{r, echo = FALSE}
+mat <- matrix(nrow = 3, ncol = 3)
+mat[, 3] <- c(60, 40, 100)
+mat[, 2] <- c(12, 28, 40)
+mat[, 1] <- c(48, 12, 60)
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo","Alto", "Total"))
+
+## Convertimos a data frame para nice print
+mat <- as.data.frame(cbind(`Tipo de docente` = c("Autoritario", "Democrático", "Total"), mat), row.names = F)
+
+mat %>%  
+    kable(digits = 2, col.names = c("Tipo de docente", "Bajo", "Alto", "Total"), escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = T) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 2, " " = 1)) 
+
+```
+
+## Frecuencias esperadas
+
+* ¿Qué observaríamos si las variables fueran independientes?
+
+```{r, echo = FALSE}
+mat <- matrix(nrow = 3, ncol = 3)
+mat[, 3] <- c(60, 40, NA)
+mat[3, ] <- c(60, 40, 100)
+
+for(i in 1:(nrow(mat)-1)){
+    for(j in 1:(ncol(mat)-1)){
+        mat[i, j] <- mat[i, ncol(mat)] * mat[nrow(mat) * j] / mat[nrow(mat), ncol(mat)]
+    }
+}
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo","Alto", "Total"))
+
+## Convertimos a data frame para nice print
+matr <- as.data.frame(cbind(`Tipo de docente` = c("Autoritario", "Democrático", "Total"), mat), row.names = F)
+
+matr %>%  
+    kable(digits = 2, col.names = c("Tipo de docente", "Bajo", "Alto", "Total"), escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = T) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 2, " " = 1)) 
+
+```
+
+## Frecuencias relativas por fila para las frecuencias esperadas
+
+* Calculemnos ahora las frecuencias relativas por fila de las frecuencias esperadas
+
+```{r, echo = FALSE}
+for(i in 1:(nrow(mat)-1)){
+    for(j in 1:(ncol(mat)-1)){
+        mat[i, j] <- mat[i, j]/mat[i, ncol(mat)]
+    }
+    mat[i, ncol(mat)] <- 1
+}
+
+mat[3, ] <- mat[3, ] / 100
+
+## Agregamos los nombres de variables y dimensiones
+dimnames(mat) <- list("Tipo de docente"  =  c("Autoritario", "Democrático", "Total"),
+"Rendimiento" = c("Bajo","Alto", "Total"))
+
+## Convertimos a data frame para nice print
+matr <- as.data.frame(cbind(`Tipo de docente` = c("Autoritario", "Democrático", "Total"), mat), row.names = F)
+
+matr %>%  
+    kable(digits = 2, col.names = c("Tipo de docente", "Bajo", "Alto", "Total"), escape = F) %>%
+    kable_styling(bootstrap_options = c("bordered"), full_width = T) %>% 
+    add_header_above(c(" " = 1, "Rendimiento" = 2, " " = 1)) 
+
+
+```
+
+---
+
+* Podemos observar que cuando las variables son independientes, las frecuencias relativas por fila para autoritario y democrático son iguales a las relativas del total.
+* Es decir, no importa que valor tome la variable tipo de docente, las frecuencias relativas por fila para el rendimiento bajo y alto, son iguales.
+
+## Grado de asociación
+
+* ¿Cómo sabemos si la relación entre variables es fuerte o débil?
+* Utilizamos coeficientes de asociación.
+* La mayoría de los test de asociación están basados en el $\chi^2$ de Pearson.
+
+## $\chi^2$ de Pearson
+
+$$\chi^2 =  \sum_{i,j} \frac{f_{i,j}^o - f_{i,j}^e}{f_{i,j}^e}$$
+
+Donde:  
+* $f_{i,j}^o$: frecuencias observadas  
+* $f_{i,j}^e$: frecuencias esperadas  
+
+## $\chi^2$ de Pearson
+
+* Es una medida de distancia de las frecuencias observadas, respecto de las esperadas si las variables fueran independientes.  
+* Es una medida absoluta.  
+* El 0 indica independencia.  
+* Su **valor máximo** depende del número de casos, y de la cantidad de filas y columnas que tenga la tabla. Para interpretarlonececitamos relativizarlo.  
+
+## $\chi^2$ de Pearson
+
+* Si nos preguntan si Buenos Aires queda cerca o lejos, una buena pregunta sería: ¿con respecto a qué?. Si lo comparamos con China, podremos decir que es cerca. Si lo comparamos con el centro de la ciudad, podremos decir que es lejos. Algo parecido sucede con el $\chi^2$.
+* Es por ello que se utilizan algunas medidas interpretación más sencilla. La mayoría de ellas está basada en el cálculo del $\chi^2$
+
+## Grado de asociación
+
+### Dos variables dicotómicas (nominales con 2 categorías)
+
+* Q de Kendall - Yule. [-1, 1]. 0 indica independencia. -1 o 1 máximo grado de asociación.
+* $\varphi$ de Yule [0, 1]. 0 indica independencia. Mientras más cerca a 1, mayor grado de asociación.
+* $r_{tet}$ [-1, 1]. 0 indica independencia. -1 o 1 máximo grado de asociación.
+
+## Grado de asociación
+
+### Nominales con más de dos categorías
+
+* C de contingencia. [0, $C_{max}$ < 1]. Mayor intensidad de asociación mientras más cerca a $C_{max}$.
+* V de Cramer. [0, 1]
+
+## Asociación en variables ordinales
+
+* Correlación por rangos de Spearman. $r_s$
+
+## Asociación en variables cuantitativas (intervalares y proporcionales)
+
+* Supongamos que estamos realizando un estudio sobre memoria en personas. Incluimos a 100 personas en el estudio. Les enseñamos una lista de 30 palabras. Medimos la cantidad de palabras recordadas y la edad de los participantes.
+* Realicemos un **gráfico de dispersión** para observar los resultados.
+
+---
+
+```{r}
+palabras <- read.csv2("../data/npalabras_edad.csv")
+
+palabras %>% 
+    ggplot(aes(x = edad, y = npalabras)) +
+    geom_point() +
+    # geom_errorbar(aes(ymin = Media - Sd, ymax = Media + Sd), width = .05) +
+    labs(y = "Cantidad de Palabras", x = "Edad(Años)") +
+    theme_bw()
+```
+
+---
+
+* El gráfico nos sugiere que la cantidad de palabras disminuye con la edad. Es una relación inversa. Es decir, a medida que aumenta una variable, la otra disminuye
+* ¿Cómo podemos medir la intensidad de la asocición
+
+## Coeficiente r de Pearson
+
+* Coeficiente de correlación lineal de Pearson: Se simboliza con una r.
+* Toma valores entre [-1, 1]. Donde -1 indica una correlación lineal inversa perfecta. 1 indica una correlación lineal directa perfecta. 0 indica independencia.
+* En general, coeficientes mayores a 0.5 o menores a -0.5 indican un grado de asociación fuerte.
+* A medida que el r se acerca a -1 o 1, los puntos del gráfico se acercan a una recta imaginaria.
+* Veamos algunos ejemplos.
+
+
+## Correlación directa fuerte
+
+```{r}
+df <- read.csv2("../data/rdfuerte.csv")
+
+df %>% 
+    ggplot(aes(x = x, y = y)) +
+    geom_point() +
+    theme_bw()
+
+```
+
+r = `r cor(df$x, df$y)`
+
+
+## Correlación inversa fuerte
+
+```{r}
+df <- read.csv2("../data/rifuerte.csv")
+
+df %>% 
+    ggplot(aes(x = x, y = y)) +
+    geom_point() +
+    theme_bw()
+
+```
+
+r = `r cor(df$x, df$y)`
+
+## Correlación nula
+
+```{r}
+df <- read.csv2("../data/rnula.csv")
+
+df %>% 
+    ggplot(aes(x = x, y = y)) +
+    geom_point() +
+    theme_bw()
+
+```
+
+r = `r cor(df$x, df$y)`
+
+## Coeficiente de determinación $R^2$
+
+* Cuando elevamos r al cuadrado, obtenemos el coeficiente de determinación, que se indica como $R^2$.  
+* Mide el porcentaje de la varianza que es compartida por las variables.
+
+## Otras medidas
+
+### Una dicotómica real y una proporcional
+
+* $r_{pb}$ Punto biserial. [-1, 1]. 0 indica independencia. -1 o 1 máximo grado de asociación.
+
+### Una dicotómica proveniente de una continua y una proporcional
+
+* $r_b$ Biserial. [-1, 1]. 0 indica independencia. -1 o 1 máximo grado de asociación.

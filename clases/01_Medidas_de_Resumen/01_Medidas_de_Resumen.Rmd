@@ -1,0 +1,95 @@
+---
+title: "Medidas de Resumen"
+subtitle: "Universidad Católica de Córdoba"
+author: Matías A. Alfonso
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  ioslides_presentation:
+      css: "../css/styles.css"
+      self_contained: false
+      logo: "../img/logo_UCC.png"
+      incremental: false
+      df_print: kable
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+## Para poder imprimir las tablas con kable_styling
+options("kableExtra.html.bsTable" = T)
+
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(dplyr)
+```
+
+## Resumen de la información{.build}
+
+Para resumir la información, haremos uso de:
+
+* Tablas
+* Gráficos
+* **Medidas de Resumen**  
+
+## Medidas de resumen{.build}
+
+* Nos permiten **sintetizar información**
+* Las medidas de resumen dependen del **Nivel de medición de la variable**
+
+### Tipos
+* **Medidas de posición**
+* Medidas de dispersión
+* Medidas de forma
+
+# Medidas de posición
+
+## Medidas de posición{.build}
+
+* Nos permiten resumir en un solo número algunas localizaciones de la distribución de los datos
+
+* Las clasificamos en:
+
+---
+
+### Medidas de tendencia central
+* Proporción
+* Moda (o modo)
+* Mediana
+* Media
+
+    
+### Medidas de tendencia no-central
+* Cuartiles
+* Percentiles
+
+
+## Medidas de resumen  
+
+* Medidas de posición
+* **Medidas de dispersión**
+* Medidas de forma
+
+## Medidas de dispersión
+
+* Indican si los valores observados se encuentran **concentrados** o **dispersos** (alejados).
+
+Estudiaremos los siguientes:
+
+* Recorrido (o rango)
+* Recorrido (o rango) intercuartilar
+* Varianza
+* Desvío estándar
+* Coeficiente de variación
+* Coeficiente de incertidumbre
+
+## Medidas de resumen  
+
+* Medidas de posición
+* Medidas de dispersión
+* **Medidas de forma**
+
+## Medidas de forma
+
+* Asimetría
+* Curtosis
