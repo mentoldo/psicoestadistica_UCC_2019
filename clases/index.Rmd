@@ -16,13 +16,7 @@ output:
 2) [Ejemplos](./01_ejemplosIntroduccion/ejemplosIntroduccion.html)
 3) [Niveles de Medición](./01_NivelesMedicion/nivelesMedicion.html)
 4) [Tablas de distribución de frecuencias](./01_tablasFrecuencia/01_tablasFrecuencia.html)
-5) [Gráficos frecuencias](./01_Graficos_de_resumen/01_Graficos_de_Resumen.html)
-6) [Medidas de Resumen](./01_Medidas_de_Resumen/01_Medidas_de_Resumen.html)
-1) [Proporción](./01_Proporcion/01_Proporcion.html)
-3) [Moda](./01_Moda/01_Moda.html)
-4) [Mediana](./01_Mediana/01_Mediana.html)
-5) [Media](./01_Media/01_Media.html)
-
+5) [Gráficos de frecuencias](./01_graficoFrecuencias/01_graficoFrecuencias.html)
 
 ### Videos
 
@@ -31,6 +25,14 @@ output:
 2) [Ejemplos de Bases de Datos](https://youtu.be/P-Iskr34erg)
 
 ## Clase 2
+
+### Diapositivas
+
+1) [Medidas de Resumen](./01_Medidas_de_Resumen/01_Medidas_de_Resumen.html)
+1) [Proporción](./01_Proporcion/01_Proporcion.html)
+3) [Moda](./01_Moda/01_Moda.html)
+4) [Mediana](./01_Mediana/01_Mediana.html)
+5) [Media](./01_Media/01_Media.html)
 1) [Medidas de dispersión](./01_Medidas_de_dispersion/01_Medidas_de_dispersion.html)
 7) [Medidas de forma](./01_Medidas_de_forma/01_Medidas_de_forma.html)
 7) [Gráficos de resumen](./01_Graficos_de_resumen/01_Graficos_de_Resumen.html)
