@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Relaciones entre variables</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Relaciones entre variables',
+                        subtitle: 'Universidad Nacional de Córdoba',
+                useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                        favIcon: 'grado_de_asociacion_files/logo.png',
+              },
+
+      // Author information
+      presenters: [
+            {
+        name:  'Matías A. Alfonso' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <link href="grado_de_asociacion_files/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
+  <link href="grado_de_asociacion_files/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
+  <link href="grado_de_asociacion_files/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
+  <script src="grado_de_asociacion_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+  <script src="grado_de_asociacion_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+  <script src="grado_de_asociacion_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+  <script src="grado_de_asociacion_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+  <script src="grado_de_asociacion_files/ioslides-13.5.1/js/hammer.js"></script>
+  <script src="grado_de_asociacion_files/ioslides-13.5.1/js/slide-controller.js"></script>
+  <script src="grado_de_asociacion_files/ioslides-13.5.1/js/slide-deck.js"></script>
+  <script src="grado_de_asociacion_files/kePrint-0.0.1/kePrint.js"></script>
+  <link href="grado_de_asociacion_files/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    summary {
+      display: list-item;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+/* https://github.com/ropensci/plotly/pull/524#issuecomment-468142578 */
+slide:not(.current) .plotly.html-widget{
+  display: block;
+}
+
+    slides > slide:not(.nobackground):before {
+      font-size: 12pt;
+      content: "";
+      position: absolute;
+      bottom: 20px;
+      left: 60px;
+      background: url(grado_de_asociacion_files/logo.png) no-repeat 0 50%;
+      -webkit-background-size: 30px 30px;
+      -moz-background-size: 30px 30px;
+      -o-background-size: 30px 30px;
+      background-size: 30px 30px;
+      padding-left: 40px;
+      height: 30px;
+      line-height: 1.9;
+    }
+  </style>
+
+  <link rel="stylesheet" href="../css/styles.css" type="text/css" />
+
+</head>
+
+<body style="opacity: 0">
+
+<slides>
+
+  <slide class="title-slide segue nobackground">
+        <aside class="gdbar"><img src="grado_de_asociacion_files/logo.png"></aside>
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+            <p style="margin-top: 6px; margin-left: -2px;">04 septiembre, 2019</p>
+          </hgroup>
+  </slide>
+
+<slide class=""><hgroup><h2>El grado de asociación</h2></hgroup><article  id="el-grado-de-asociacion">
+
+<ul class = 'build'>
+<li>Decimos que eventos son independientes si la ocurrencia de uno de ellos no afecta la ocurrencia del otro.</li>
+<li><strong>Definición</strong>: Dos variables son estadísticamente independientes si la frecuencia relativa de cada celda es igual al producto de las <strong>frecuencias relativas marginales</strong> de la fila y columna a las que la celda pertenece.</li>
+<li>Volvamos al ejemplo anterior, pero ahora supongamos que medimos la variable rendimiento con dos categorías posibles: bajo, alto.</li>
+<li>Supongamos que el tipo de docente tiene un efecto sobre el rendimiento y obtenemos una tabla como la siguiente. Es decir, las variables <strong>no son independientes</strong></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+
+<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Rendimiento</div>
+
+</th>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+</tr>
+
+<tr>
+
+<th style="text-align:left;">
+
+Tipo de docente
+
+</th>
+
+<th style="text-align:left;">
+
+Bajo
+
+</th>
+
+<th style="text-align:left;">
+
+Alto
+
+</th>
+
+<th style="text-align:left;">
+
+Total
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+60
+
+</td>
+
+<td style="text-align:left;">
+
+0
+
+</td>
+
+<td style="text-align:left;">
+
+60
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+0
+
+</td>
+
+<td style="text-align:left;">
+
+40
+
+</td>
+
+<td style="text-align:left;">
+
+40
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Total
+
+</td>
+
+<td style="text-align:left;">
+
+60
+
+</td>
+
+<td style="text-align:left;">
+
+40
+
+</td>
+
+<td style="text-align:left;">
+
+100
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<ul class = 'build'>
+<li>Esto es un efecto extremo. En la práctica, si hubiera asociación entre variables, esperaríamos algo más parecido a esto:</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+
+<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Rendimiento</div>
+
+</th>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+</tr>
+
+<tr>
+
+<th style="text-align:left;">
+
+Tipo de docente
+
+</th>
+
+<th style="text-align:left;">
+
+Bajo
+
+</th>
+
+<th style="text-align:left;">
+
+Alto
+
+</th>
+
+<th style="text-align:left;">
+
+Total
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+48
+
+</td>
+
+<td style="text-align:left;">
+
+12
+
+</td>
+
+<td style="text-align:left;">
+
+60
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+12
+
+</td>
+
+<td style="text-align:left;">
+
+28
+
+</td>
+
+<td style="text-align:left;">
+
+40
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Total
+
+</td>
+
+<td style="text-align:left;">
+
+60
+
+</td>
+
+<td style="text-align:left;">
+
+40
+
+</td>
+
+<td style="text-align:left;">
+
+100
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</article></slide><slide class=""><hgroup><h2>Frecuencias esperadas</h2></hgroup><article  id="frecuencias-esperadas">
+
+<ul class = 'build'>
+<li>¿Qué observaríamos si las variables fueran independientes?</li>
+</ul>
+
+<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Rendimiento</div>
+
+</th>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+</tr>
+
+<tr>
+
+<th style="text-align:left;">
+
+Tipo de docente
+
+</th>
+
+<th style="text-align:left;">
+
+Bajo
+
+</th>
+
+<th style="text-align:left;">
+
+Alto
+
+</th>
+
+<th style="text-align:left;">
+
+Total
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+36
+
+</td>
+
+<td style="text-align:left;">
+
+24
+
+</td>
+
+<td style="text-align:left;">
+
+60
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+24
+
+</td>
+
+<td style="text-align:left;">
+
+16
+
+</td>
+
+<td style="text-align:left;">
+
+40
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Total
+
+</td>
+
+<td style="text-align:left;">
+
+60
+
+</td>
+
+<td style="text-align:left;">
+
+40
+
+</td>
+
+<td style="text-align:left;">
+
+100
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</article></slide><slide class=""><hgroup><h2>Frecuencias relativas por fila para las frecuencias esperadas</h2></hgroup><article  id="frecuencias-relativas-por-fila-para-las-frecuencias-esperadas">
+
+<ul class = 'build'>
+<li>Calculemnos ahora las frecuencias relativas por fila de las frecuencias esperadas</li>
+</ul>
+
+<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
+
+<thead>
+
+<tr>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Rendimiento</div>
+
+</th>
+
+<th style="border-bottom:hidden" colspan="1">
+
+</th>
+
+</tr>
+
+<tr>
+
+<th style="text-align:left;">
+
+Tipo de docente
+
+</th>
+
+<th style="text-align:left;">
+
+Bajo
+
+</th>
+
+<th style="text-align:left;">
+
+Alto
+
+</th>
+
+<th style="text-align:left;">
+
+Total
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Autoritario
+
+</td>
+
+<td style="text-align:left;">
+
+0.6
+
+</td>
+
+<td style="text-align:left;">
+
+0.4
+
+</td>
+
+<td style="text-align:left;">
+
+1
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Democrático
+
+</td>
+
+<td style="text-align:left;">
+
+0.6
+
+</td>
+
+<td style="text-align:left;">
+
+0.4
+
+</td>
+
+<td style="text-align:left;">
+
+1
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Total
+
+</td>
+
+<td style="text-align:left;">
+
+0.6
+
+</td>
+
+<td style="text-align:left;">
+
+0.4
+
+</td>
+
+<td style="text-align:left;">
+
+1
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+
+<ul class = 'build'>
+<li>Podemos observar que cuando las variables son independientes, las frecuencias relativas por fila para autoritario y democrático son iguales a las relativas del total.</li>
+<li>Es decir, no importa que valor tome la variable tipo de docente, las frecuencias relativas por fila para el rendimiento bajo y alto, son iguales.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Grado de asociación</h2></hgroup><article  id="grado-de-asociacion">
+
+<ul class = 'build'>
+<li>¿Cómo sabemos si la relación entre variables es fuerte o débil?</li>
+<li>Utilizamos coeficientes de asociación.</li>
+<li>La mayoría de los test de asociación están basados en el \(\chi^2\) de Pearson.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>\(\chi^2\) de Pearson</h2></hgroup><article  id="chi2-de-pearson">
+
+<p>\[\chi^2 =  \sum_{i,j} \frac{f_{i,j}^o - f_{i,j}^e}{f_{i,j}^e}\]</p>
+
+<p>Donde:<br/>* \(f_{i,j}^o\): frecuencias observadas<br/>* \(f_{i,j}^e\): frecuencias esperadas</p>
+
+</article></slide><slide class=""><hgroup><h2>\(\chi^2\) de Pearson</h2></hgroup><article  id="chi2-de-pearson-1">
+
+<ul class = 'build'>
+<li>Es una medida de distancia de las frecuencias observadas, respecto de las esperadas si las variables fueran independientes.<br/></li>
+<li>Es una medida absoluta.<br/></li>
+<li>El 0 indica independencia.<br/></li>
+<li>Su <strong>valor máximo</strong> depende del número de casos, y de la cantidad de filas y columnas que tenga la tabla. Para interpretarlonececitamos relativizarlo.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>\(\chi^2\) de Pearson</h2></hgroup><article  id="chi2-de-pearson-2">
+
+<ul class = 'build'>
+<li>Si nos preguntan si Buenos Aires queda cerca o lejos, una buena pregunta sería: ¿con respecto a qué?. Si lo comparamos con China, podremos decir que es cerca. Si lo comparamos con el centro de la ciudad, podremos decir que es lejos. Algo parecido sucede con el \(\chi^2\).</li>
+<li>Es por ello que se utilizan algunas medidas interpretación más sencilla. La mayoría de ellas está basada en el cálculo del \(\chi^2\)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Grado de asociación</h2></hgroup><article  id="grado-de-asociacion-1">
+
+<h3>Dos variables dicotómicas (nominales con 2 categorías)</h3>
+
+<ul class = 'build'>
+<li>Q de Kendall - Yule. [-1, 1]. 0 indica independencia. -1 o 1 máximo grado de asociación.</li>
+<li>\(\varphi\) de Yule [0, 1]. 0 indica independencia. Mientras más cerca a 1, mayor grado de asociación.</li>
+<li>\(r_{tet}\) [-1, 1]. 0 indica independencia. -1 o 1 máximo grado de asociación.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Grado de asociación</h2></hgroup><article  id="grado-de-asociacion-2">
+
+<h3>Nominales con más de dos categorías</h3>
+
+<ul class = 'build'>
+<li>C de contingencia. [0, \(C_{max}\) &lt; 1]. Mayor intensidad de asociación mientras más cerca a \(C_{max}\).</li>
+<li>V de Cramer. [0, 1]</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Asociación en variables ordinales</h2></hgroup><article  id="asociacion-en-variables-ordinales">
+
+<ul class = 'build'>
+<li>Correlación por rangos de Spearman. \(r_s\)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Asociación en variables cuantitativas (intervalares y proporcionales)</h2></hgroup><article  id="asociacion-en-variables-cuantitativas-intervalares-y-proporcionales">
+
+<ul class = 'build'>
+<li>Supongamos que estamos realizando un estudio sobre memoria en personas. Incluimos a 100 personas en el estudio. Les enseñamos una lista de 30 palabras. Medimos la cantidad de palabras recordadas y la edad de los participantes.</li>
+<li>Realicemos un <strong>gráfico de dispersión</strong> para observar los resultados.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+
+<p><img src="grado_de_asociacion_files/figure-html/unnamed-chunk-5-1.png" width="720" /></p>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+
+<ul class = 'build'>
+<li>El gráfico nos sugiere que la cantidad de palabras disminuye con la edad. Es una relación inversa. Es decir, a medida que aumenta una variable, la otra disminuye</li>
+<li>¿Cómo podemos medir la intensidad de la asocición</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Coeficiente r de Pearson</h2></hgroup><article  id="coeficiente-r-de-pearson">
+
+<ul class = 'build'>
+<li>Coeficiente de correlación lineal de Pearson: Se simboliza con una r.</li>
+<li>Toma valores entre [-1, 1]. Donde -1 indica una correlación lineal inversa perfecta. 1 indica una correlación lineal directa perfecta. 0 indica independencia.</li>
+<li>En general, coeficientes mayores a 0.5 o menores a -0.5 indican un grado de asociación fuerte.</li>
+<li>A medida que el r se acerca a -1 o 1, los puntos del gráfico se acercan a una recta imaginaria.</li>
+<li>Veamos algunos ejemplos.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Correlación directa fuerte</h2></hgroup><article  id="correlacion-directa-fuerte">
+
+<p><img src="grado_de_asociacion_files/figure-html/unnamed-chunk-6-1.png" width="720" /></p>
+
+<p>r = 0.9712959</p>
+
+</article></slide><slide class=""><hgroup><h2>Correlación inversa fuerte</h2></hgroup><article  id="correlacion-inversa-fuerte">
+
+<p><img src="grado_de_asociacion_files/figure-html/unnamed-chunk-7-1.png" width="720" /></p>
+
+<p>r = -0.9678475</p>
+
+</article></slide><slide class=""><hgroup><h2>Correlación nula</h2></hgroup><article  id="correlacion-nula">
+
+<p><img src="grado_de_asociacion_files/figure-html/unnamed-chunk-8-1.png" width="720" /></p>
+
+<p>r = -0.0147557</p>
+
+</article></slide><slide class=""><hgroup><h2>Coeficiente de determinación \(R^2\)</h2></hgroup><article  id="coeficiente-de-determinacion-r2">
+
+<ul class = 'build'>
+<li>Cuando elevamos r al cuadrado, obtenemos el coeficiente de determinación, que se indica como \(R^2\).<br/></li>
+<li>Mide el porcentaje de la varianza que es compartida por las variables.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Otras medidas</h2></hgroup><article  id="otras-medidas">
+
+<h3>Una dicotómica real y una proporcional</h3>
+
+<ul class = 'build'>
+<li>\(r_{pb}\) Punto biserial. [-1, 1]. 0 indica independencia. -1 o 1 máximo grado de asociación.</li>
+</ul>
+
+<h3>Una dicotómica proveniente de una continua y una proporcional</h3>
+
+<ul class = 'build'>
+<li>\(r_b\) Biserial. [-1, 1]. 0 indica independencia. -1 o 1 máximo grado de asociación.</li>
+</ul></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
