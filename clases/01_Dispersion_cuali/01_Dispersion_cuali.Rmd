@@ -1,0 +1,61 @@
+---
+title: "Medidas de dispersión en variables cualitativas"
+subtitle: "Universidad Católica de Córdoba"
+author: Matías A. Alfonso
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  ioslides_presentation:
+      css: "../css/styles.css"
+      self_contained: false
+      logo: "../img/logo_UCC.png"
+      incremental: false
+      df_print: kable
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+## Para poder imprimir las tablas con kable_styling
+options("kableExtra.html.bsTable" = T)
+
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(dplyr)
+```
+
+## Medidas de dispersión
+
+* Cuando las variables son cualitativas, podemos observar la dispersión en las tablas de distribución de frecuencias.
+* Si una de las categorías de la variables concentra más del 80% de los casos, diremos que la variable tiene **poca dispersión**.
+* La **máxima dispersión** se observa cuando los datos están equi-distribuidos en las todas las categorías de la variable.
+
+## Ejemplo
+
+* En la siguiente tabla, las frecuencias para las categorías se encuentran equi-distribuidas. Los datos tienen la máxima dispersión posible.  
+
+```{r}
+tabla <- data.frame(Rendimiento = c("Muy bueno", "Bueno", "Regular", "Satisfactorio"),
+                    f = c(25, 25, 25, 25),
+                    `frel` = c(0.25, 0.25, 0.25, 0.25) )
+
+kable(tabla, digits = 2) %>% 
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                  full_width = F)
+```
+
+## Ejemplo
+* En la siguiente tabla, los valores se encuentran concentrados en una sola categoría de la variables. La variables tiene poca dispersión.
+
+```{r}
+tabla <- data.frame(Rendimiento = c("Muy bueno", "Bueno", "Regular", "Satisfactorio"),
+                    f = c(25, 25, 25, 25),
+                    `frel` = c(0.05, 0.8, 0.05, 0.1) )
+
+kable(tabla, digits = 2) %>% 
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                  full_width = F)
+```
+
+
+

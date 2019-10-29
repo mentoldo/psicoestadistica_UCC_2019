@@ -33,9 +33,19 @@ output:
 3) [Moda](./01_Moda/01_Moda.html)
 4) [Mediana](./01_Mediana/01_Mediana.html)
 5) [Media](./01_Media/01_Media.html)
-1) [Medidas de dispersión](./01_Medidas_de_dispersion/01_Medidas_de_dispersion.html)
 7) [Medidas de forma](./01_Medidas_de_forma/01_Medidas_de_forma.html)
+
+## Clase 3
+
+### Diapositivas
+1) [Medidas de dispersión](./01_Medidas_de_dispersion/01_Medidas_de_dispersion.html)
 7) [Gráficos de resumen](./01_Graficos_de_resumen/01_Graficos_de_Resumen.html)
+7) [Dispersion en variables cualitativas](./01_Dispersion_cuali/01_Dispersion_cuali.html)
+7) [El individuo en relación a su grupo](./01_individuo_relacion_grupo/individuo_relacion_grupo.html)
+
+
+## Clase 4
+### Diapositivas
 8) [Tablas de contingencia](./01_tablas_de_contingencia/tablas_de_contingencia.html)  
 8) [Grado de asociacion](./01_grado_de_asociacion/grado_de_asociacion.html)  
 
